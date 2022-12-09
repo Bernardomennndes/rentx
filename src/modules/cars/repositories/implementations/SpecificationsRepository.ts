@@ -22,13 +22,13 @@ class SpecificationRepository implements ISpecificationsRepository {
   //   return SpecificationRepository.INSTANCE;
   // }
 
-  create({ name, description }: ICreateSpecificationDTO): void {
+  async create({ name, description }: ICreateSpecificationDTO): Promise<void> {
     const specification = this.repository.create({
       name,
       description,
     });
 
-    this.repository.save(specification);
+    await this.repository.save(specification);
   }
 
   async findByName(name: string): Promise<Specification> {
