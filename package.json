@@ -2,16 +2,17 @@
   "name": "rentx",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/Bernardomennndes/RentalX.git",
+  "repository": "https://github.com/Bernardomennndes/RentX.git",
   "author": "Bernardo Mendes <bernardomennndes@outlook.com>",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
-    "test": "jest"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "test": "NODE_ENV=test jest --runInBand --detectOpenHandles",
+    "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
     "csv-parse": "^5.3.2",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
@@ -25,7 +26,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.14",
     "@types/jest": "^29.2.4",
     "@types/jsonwebtoken": "^8.5.9",
