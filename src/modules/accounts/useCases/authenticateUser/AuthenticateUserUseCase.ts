@@ -2,53 +2,53 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
-import { AppError } from '@shared/errors/AppError';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
 interface IResponse {
-  user: {
-    name: string;
-    email: string;
-  };
-  token: string;
+	user: {
+		name: string;
+		email: string;
+	};
+	token: string;
 }
 
 @injectable()
 class AuthenticateUserUseCase {
-  constructor(
-    @inject('UserRepository')
-    private usersRepository: IUsersRepository,
-  ) {}
+	constructor(
+		@inject('UserRepository')
+		private usersRepository: IUsersRepository,
+	) {}
 
-  async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email);
+	async execute({ email, password }: IRequest): Promise<IResponse> {
+		const user = await this.usersRepository.findByEmail(email);
 
-    if (!user) throw new AppError('Email or password incorrect.');
+		if (!user) throw new AppError('Email or password incorrect.');
 
-    const passwordMatch = await compare(password, user.password);
+		const passwordMatch = await compare(password, user.password);
 
-    if (!passwordMatch) throw new AppError('Email or password incorrect.');
+		if (!passwordMatch) throw new AppError('Email or password incorrect.');
 
-    const token = sign({}, 'dada8dd8cf8a81db9786161269f642bc', {
-      subject: user.id,
-      expiresIn: '1d',
-    });
+		const token = sign({}, 'dada8dd8cf8a81db9786161269f642bc', {
+			subject: user.id,
+			expiresIn: '1d',
+		});
 
-    const tokenReturn: IResponse = {
-      token,
-      user: {
-        name: user.name,
-        email: user.email,
-      },
-    };
+		const tokenReturn: IResponse = {
+			token,
+			user: {
+				name: user.name,
+				email: user.email,
+			},
+		};
 
-    return tokenReturn;
-  }
+		return tokenReturn;
+	}
 }
 
 export { AuthenticateUserUseCase };
