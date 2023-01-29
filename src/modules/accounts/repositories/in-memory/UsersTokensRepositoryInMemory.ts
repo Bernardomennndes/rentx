@@ -6,6 +6,10 @@ import { IUsersTokensRepository } from '../IUsersTokensRepository';
 class UsersTokensRepositoryInMemory implements IUsersTokensRepository {
 	usersTokens: UserTokens[];
 
+	constructor() {
+		this.usersTokens = [];
+	}
+
 	async create({
 		user_id,
 		expires_date,

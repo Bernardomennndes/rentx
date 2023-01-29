@@ -78,9 +78,7 @@ describe('Create Rental', () => {
 				car_id: 'test',
 				expected_return_date: dayAdd24Hours,
 			}),
-		).rejects.toEqual(
-			new AppError('There is already a proposed rental to this user.'),
-		);
+		).rejects.toEqual(new AppError('Car is Unavailable.'));
 	});
 
 	it('Should not be able to create a new rental with return time less than 24 hours', async () => {

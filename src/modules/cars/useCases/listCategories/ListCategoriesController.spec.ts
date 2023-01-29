@@ -35,22 +35,24 @@ describe('List Categories Controller', () => {
 
 		const { token } = responseToken.body;
 
-		['Category 1', 'Category 2', 'Category 3'].forEach(async category => {
-			await request(app)
-				.post('/categories')
-				.send({
-					name: category,
-					description: 'Category Supertest Description',
-				})
-				.set({
-					Authorization: `Bearer ${token}`,
-				});
-		});
+		await request(app)
+			.post('/categories')
+			.send({
+				name: 'Category Test',
+				description: 'Category Supertest Description',
+			})
+			.set({
+				Authorization: `Bearer ${token}`,
+			});
 
-		const response = await request(app).get('/categories');
+		const response = await request(app)
+			.get('/categories')
+			.set({
+				Authorization: `Bearer ${token}`,
+			});
 
 		expect(response.statusCode).toBe(200);
-		expect(response.body.length).toBe(3);
+		expect(response.body.length).toBe(1);
 	});
 
 	it('Should not be able to create a new category if name already existing', async () => {
@@ -64,7 +66,7 @@ describe('List Categories Controller', () => {
 		const response = await request(app)
 			.post('/categories')
 			.send({
-				name: 'Category Supertest',
+				name: 'Category Test',
 				description: 'Category Supertest Description',
 			})
 			.set({

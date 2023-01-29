@@ -6,6 +6,7 @@ import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepositor
 import { IUsersTokensRepository } from '@modules/accounts/repositories/IUsersTokensRepository';
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider';
 import { IMailProvider } from '@shared/container/providers/MailProvider/IMailProvider';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 class SendForgottenPasswordMailUseCase {
@@ -31,7 +32,7 @@ class SendForgottenPasswordMailUseCase {
 			'forgotPassword.hbs',
 		);
 
-		if (!user) throw new Error('User not found.');
+		if (!user) throw new AppError('User not found.');
 
 		const refresh_token = uuidV4();
 
