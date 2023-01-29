@@ -4,3 +4,4 @@ diagrama.png
 .vscode
 .env
 coverage
+ormconfig.json
