@@ -1,6 +1,6 @@
 <h1 align="center">Node.js REST API | Car rental service controller and management application</h1>
 
-The purpose of the project is to manage the process of rental, devolution and registration of cars, in addition to users of the app.
+The purpose of the project is to manage the process of rental, devolution and registration of cars, beeing able to check their availability, total costs and billings based on the given rental date and expected return date.
 
 <br />
 <h2>Dependencies</h2>
@@ -13,7 +13,7 @@ The purpose of the project is to manage the process of rental, devolution and re
 - [Express](https://expressjs.com/pt-br/)
 - [Tsyringe](https://www.npmjs.com/package/tsyringe?activeTab=readme)
 
-### Utiliry Libraries
+### Utility Libraries
 
 - [Day.js](https://day.js.org)
 - [Handlebars](https://handlebarsjs.com/)
