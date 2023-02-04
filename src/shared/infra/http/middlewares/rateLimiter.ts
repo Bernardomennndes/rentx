@@ -5,7 +5,11 @@ import redis from 'redis';
 import { AppError } from '@shared/errors/AppError';
 
 const redisClient = redis.createClient({
-	url: `redis://${process.env.REDIS_URL}:${process.env.REDIS_PORT}`,
+	url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+});
+
+redisClient.on('connect', () => {
+	console.log(' - Redis client successfully connected');
 });
 
 const limiter = new RateLimiterRedis({
